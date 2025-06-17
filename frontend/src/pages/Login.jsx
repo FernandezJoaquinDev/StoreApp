@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import "../css/login.css";
-function Login({ data, cambio }) {
+function Login({ cambioData, cambio, data }) {
   return (
     <>
       <div className="login">
-        <div className="d-flex flex-column align-items-center justify-content-center">
+        <div className="flex-colum">
           <h2>Ingrese Su Usuario</h2>
 
           <label htmlFor="dni">Ingrese su dni: </label>
@@ -12,7 +12,7 @@ function Login({ data, cambio }) {
             type="text"
             className="input-group"
             id="dni"
-            onChange={(e) => setData({ ...data, dni: e.target.value })}
+            onChange={(e) => cambioData({ ...data, dni: e.target.value })}
             value={data.dni}
           />
 
@@ -21,7 +21,7 @@ function Login({ data, cambio }) {
             type="text"
             className="input-group"
             id="password"
-            onChange={(e) => setData({ ...data, password: e.target.value })}
+            onChange={(e) => cambioData({ ...data, password: e.target.value })}
             value={data.password}
           />
           <input
