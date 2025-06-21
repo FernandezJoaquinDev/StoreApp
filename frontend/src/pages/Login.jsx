@@ -1,6 +1,27 @@
 import React, { useState } from "react";
 import "../css/login.css";
-function Login({ cambioData, cambio, data }) {
+import { loginAuth } from "../helpers/loginConnection";
+
+function Login({ logeado, guardarDatos }) {
+  const [dni, setDni] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = async () => {
+    e.preventDefault();
+    const datos = {
+      dni: dni,
+      password: password,
+    };
+    const resp = await loginAuth(datos);
+    if (resp?.token) {
+      localStorage.setItem("token", resp.token);
+      guardarDatos(resp.usuario);
+      logeado();
+    } else {
+      return { msg: "Error en el login" };
+    }
+  };
+
   return (
     <>
       <div className="login">
@@ -12,8 +33,8 @@ function Login({ cambioData, cambio, data }) {
             type="text"
             className="input-group"
             id="dni"
-            onChange={(e) => cambioData({ ...data, dni: e.target.value })}
-            value={data.dni}
+            onChange={(e) => setDni(e.target.value)}
+            value={dni}
           />
 
           <label htmlFor="password">Ingrese su contraseña: </label>
@@ -21,14 +42,14 @@ function Login({ cambioData, cambio, data }) {
             type="text"
             className="input-group"
             id="password"
-            onChange={(e) => cambioData({ ...data, password: e.target.value })}
-            value={data.password}
+            onChange={(e) => cambioPassword(e.target.value)}
+            value={password}
           />
           <input
             type="button"
             value="Enviar"
             className="btn btn-lg btn-danger"
-            onClick={cambio}
+            onClick={handleLogin}
           />
         </div>
       </div>
