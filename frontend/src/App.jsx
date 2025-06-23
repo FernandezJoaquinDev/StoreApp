@@ -28,8 +28,8 @@ function App() {
 
   useEffect(() => {
     traerProductos();
-  }, []);
-
+  }, [listaProductos]);
+  console.log(listaProductos);
   return (
     <>
       <div className="container-fluid vh-100">
@@ -53,8 +53,6 @@ function App() {
                 </RutasProtegidas> */}
               </Routes>
             </BrowserRouter>
-
-            <h1>Esto es la pagina principal</h1>
           </div>
           <Menu />
         </div>
