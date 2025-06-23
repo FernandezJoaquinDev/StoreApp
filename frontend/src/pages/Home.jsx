@@ -1,10 +1,12 @@
 import ProductCard from "../components/ProductCard";
 
-function Home({ data }) {
+function Home({ listaProductos }) {
   return (
     <div>
-      {data.map((item) => {
-        <ProductCard data={item} />;
+      {listaProductos.map((item) => {
+        <div className="container">
+          <ProductCard item={item} />;
+        </div>;
       })}
     </div>
   );

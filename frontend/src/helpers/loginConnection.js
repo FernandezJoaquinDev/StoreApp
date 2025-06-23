@@ -1,4 +1,4 @@
-url = "localhost:algo";
+const url = "http://localhost:5000";
 
 export const loginAuth = async (datos) => {
   try {

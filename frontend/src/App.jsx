@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import Login from "./pages/Login";
 import NavBar from "./components/NavBar";
@@ -6,18 +6,29 @@ import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Home from "./pages/Home";
 import Menu from "./components/Menu";
 import Error404 from "./pages/Error404";
+import traerProductos from "./helpers/productUtilities";
 
 function App() {
   const [data, setData] = useState(null);
   const [loged, setLoged] = useState(false);
-
+  const [listaProductos, setListaProductos] = useState([]);
   const logeado = () => {
     setLoged(true);
   };
 
-  guardarDatos = (datos) => {
+  const traerProductos = async () => {
+    const url = "http://localhost:5000/api/products";
+    const resp = await fetch(url);
+    const { productos } = await resp.json();
+    setListaProductos(productos);
+  };
+  const guardarDatos = (datos) => {
     setData(datos);
   };
+
+  useEffect(() => {
+    traerProductos();
+  }, []);
 
   return (
     <>
@@ -26,7 +37,10 @@ function App() {
           <div className="col-10 p-4">
             <BrowserRouter>
               <Routes>
-                <Route path="/home" element={<Home />} />
+                <Route
+                  path="/"
+                  element={<Home listaProductos={listaProductos} />}
+                />
                 <Route
                   path="/login"
                   element={

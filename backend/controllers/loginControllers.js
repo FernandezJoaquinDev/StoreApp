@@ -10,7 +10,10 @@ const handleLogin = async (req = require, res = response) => {
     if (!empleadoExists) {
       return res.status(401).json({ msg: "No se encontro el usuario" });
     }
-    const passVerified = bcrypt.compareSync(password, empleadoExists.password);
+    const passVerified = bcrypt.compareSync(
+      `${password}`,
+      `${empleadoExists.password}`
+    );
     if (!passVerified) {
       return res.status(401).json({ msg: "No se encontro el usuario" });
     }

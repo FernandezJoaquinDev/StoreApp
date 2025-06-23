@@ -12,7 +12,7 @@ const createEmpleado = async (req = request, res = response) => {
         .json({ msg: "El dni ya esta registrado en el sistema" });
     }
     const salt = 10;
-    const hash = await bcrypt.hash(password, salt);
+    const hash = await bcrypt.hash(`${password}`, salt);
     const newEmp = new Empleado({ ...resto, password: hash, dni });
     await newEmp.save();
 
