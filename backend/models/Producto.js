@@ -26,6 +26,7 @@ const ProductSchema = new mongoose.Schema(
 
 ProductSchema.methods.toJSON = function () {
   const { __v, _id, ...producto } = this.toObject();
+  producto.id = _id;
   return producto;
 };
 

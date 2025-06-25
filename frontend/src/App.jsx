@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import Menu from "./components/Menu";
 import Error404 from "./pages/Error404";
 import traerProductos from "./helpers/productUtilities";
+import Carrito from "./pages/Carrito";
 
 function App() {
   const [data, setData] = useState(null);
@@ -14,6 +15,13 @@ function App() {
   const [listaProductos, setListaProductos] = useState([]);
   const logeado = () => {
     setLoged(true);
+  };
+
+  const [carrito, setCarrito] = useState([]);
+
+  const handleCarrito = (producto) => {
+    setCarrito((prev) => [...prev, producto]);
+    console.log("carrito", carrito);
   };
 
   const traerProductos = async () => {
@@ -29,30 +37,34 @@ function App() {
   useEffect(() => {
     traerProductos();
   }, [listaProductos]);
-  console.log(listaProductos);
+
   return (
     <>
       <div className="container-fluid vh-100">
         <div className="row h-100">
           <div className="col-10 p-4">
-            <BrowserRouter>
-              <Routes>
-                <Route
-                  path="/"
-                  element={<Home listaProductos={listaProductos} />}
-                />
-                <Route
-                  path="/login"
-                  element={
-                    <Login guardarDatos={guardarDatos} logeado={logeado} />
-                  }
-                />
-                <Route path="*" element={<Error404 />} />
-                {/* <RutasProtegidas loged={loged}>
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <Home
+                    listaProductos={listaProductos}
+                    handleCarrito={handleCarrito}
+                  />
+                }
+              />
+              <Route
+                path="/login"
+                element={
+                  <Login guardarDatos={guardarDatos} logeado={logeado} />
+                }
+              />
+              <Route path="/carrito" element={<Carrito carrito={carrito} />} />
+              <Route path="*" element={<Error404 />} />
+              {/* <RutasProtegidas loged={loged}>
                   
                 </RutasProtegidas> */}
-              </Routes>
-            </BrowserRouter>
+            </Routes>
           </div>
           <Menu />
         </div>

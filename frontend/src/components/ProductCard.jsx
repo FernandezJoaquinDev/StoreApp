@@ -1,6 +1,13 @@
 import { FaCartPlus, FaPlus } from "react-icons/fa";
 
-function ProductCard({ item }) {
+function ProductCard({ item, handleCarrito }) {
+  const cargaSegura = (item) => {
+    if (item.stock > 0) {
+      handleCarrito(item);
+    } else {
+      alert("No hay stock del producto");
+    }
+  };
   return (
     <div>
       <div className="card text-center">
@@ -11,7 +18,7 @@ function ProductCard({ item }) {
             <p className="card-text">precio: ${item.price}</p>
             <p className="card-text"> stock: {item.stock}</p>
           </div>
-          <span href="#" className="btn btn-primary">
+          <span className="btn btn-primary" onClick={() => cargaSegura(item)}>
             <FaPlus />
             <FaCartPlus />
           </span>
