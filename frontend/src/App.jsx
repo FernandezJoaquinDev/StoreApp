@@ -7,7 +7,7 @@ import Home from "./pages/Home";
 import Menu from "./components/Menu";
 import Error404 from "./pages/Error404";
 import traerProductos from "./helpers/productUtilities";
-import Carrito from "./pages/Carrito";
+import Carrito from "./pages/carrito";
 
 function App() {
   const [data, setData] = useState(null);
@@ -15,6 +15,7 @@ function App() {
   const [listaProductos, setListaProductos] = useState([]);
   const logeado = () => {
     setLoged(true);
+    console.log(data);
   };
 
   const [carrito, setCarrito] = useState([]);
@@ -30,6 +31,7 @@ function App() {
     const { productos } = await resp.json();
     setListaProductos(productos);
   };
+
   const guardarDatos = (datos) => {
     setData(datos);
   };

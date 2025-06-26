@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function Menu() {
   return (
-    <div className="col-2 bg-dark border-start d-flex flex-column p-2 text-center">
+    <div className="col-2 bg-dark border-start d-flex flex-column p-2 text-center min-vh-100">
       <Link to={"/"}>
         <h4 className="text-light my-3">ProductApp</h4>
       </Link>
